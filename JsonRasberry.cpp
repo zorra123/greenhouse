@@ -23,6 +23,6 @@ void JsonRasberry::calc(const SensorData &Sensor)
 {
 	if(SoilMoistureMin<Sensor.DataGroundGygrometer[0])
 	{
-		Serial.println("success final test commit v_2");
+		Serial.println("success");
 	}
 }
