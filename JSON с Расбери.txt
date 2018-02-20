@@ -1,0 +1,17 @@
+{"SoilMoistureLimits":[300,700],"Light":1,"AirTemperatureLimits":[20,25],"SoilTemperatureLimits":[20,25]}
+
+{
+  "SoilMoistureLimits": [
+    300,
+    700
+  ],
+  "Light": 0,
+  "AirTemperatureLimits": [
+    20,
+    25
+  ],
+  "SoilTemperatureLimits": [
+    20,
+    25
+  ]
+}
