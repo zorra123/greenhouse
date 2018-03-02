@@ -2,7 +2,7 @@
 class SensorData{
   public:
    //data
-    double DataGroundTemperatureSensors[2];
+    double DataGroundTemperatureSensors[3];
     double BmeTemperature;
     double BmeHumidity;
     double BmePressure;

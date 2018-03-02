@@ -14,8 +14,12 @@ void setup(void)
   Serial.begin(9600);
   MsTimer2::set(5000,function); // каждые 5 с вызывает функцию, считывющую показатели с датчиков и отправляет
                                 // JSON в Serial.
-  MsTimer2::start();             
-   //delay(100); // let sensor boot up
+  pinMode(3, OUTPUT);
+  pinMode(8, OUTPUT);
+  digitalWrite(3, LOW);
+  digitalWrite(8, LOW);
+  MsTimer2::start();
+  
 }
 
 void function()
@@ -58,6 +62,9 @@ void inputJson()
   }
 }
 void loop(void) { 
+  //8 лампы 3 вентиляторы
+ 
+//  digitalWrite(pin, value)
   if (stringComplete) {
     inputJson();// обработка принимаемого json, там же вызов необходмых функций.
     // очищаем строку:

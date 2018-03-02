@@ -30,6 +30,7 @@ void SensorData::calc()
       JsonArray& DataGroundTemperatureSensor = root.createNestedArray("DataGroundTemperatureSensor");
       DataGroundTemperatureSensor.add(DataGroundTemperatureSensors[0]);
       DataGroundTemperatureSensor.add(DataGroundTemperatureSensors[1]);
+      DataGroundTemperatureSensor.add(DataGroundTemperatureSensors[2]);
     }
   
     bool status;
@@ -69,7 +70,11 @@ void SensorData::calc()
     //root["GroundGygrometer4"] = "";
     DataGroundGygrometer[3] = analogRead(A3);
     DataGroundGygrometers.add(DataGroundGygrometer[3]);
-    
+
+    root["Watering"] = 0;
+    root["Light"] = 0;
+    root["Heating"] = 0;
+    root["Blowing"] = 0;
     //root.printTo(Serial);
     //Serial.println();
     root.prettyPrintTo(Serial);
@@ -125,23 +130,23 @@ bool SensorData::GroundTemperatureSensors(double *DataGroundTemperatureSensors)
     }
     else
     {
-      //проверка на целостности данных
-      if ( OneWire::crc8(addr, 7) != addr[7]) {
-          Serial.print("CRC is not valid!\n");  //  "CRC не корректен!\n")
-          return 0;
-      }
-     
-      ds.reset();
-      
+      ds.reset();      
       ds.write(0xCC);           // команда 0xCC - отправка команды всем ведомым устройствам
       ds.write(0x44,1);         // запускаем конверсию и включаем паразитное питание
-     
       delay(1000);     // 750 миллисекунд может хватить, а может и нет
       do 
       {
+        //проверка на целостности данных
+        if ( OneWire::crc8(addr, 7) != addr[7]) {
+            Serial.print("CRC is not valid!\n");  //  "CRC не корректен!\n")
+            return 0;
+        }
+        //Serial.print("number of devices = ");
+        //Serial.println(i);
         DataGroundTemperatureSensors[i] = temp(addr);
         i++;
       }while(ds.search(addr));
+      
       return 1;
      } 
   }
